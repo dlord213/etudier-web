@@ -65,65 +65,41 @@ export default function ClientSideLayout({
     }
   };
 
+  const renderTasks = (filteredTasks: TaskProps[]) => {
+    return filteredTasks.length > 0 ? (
+      filteredTasks.map((task, index) => (
+        <TaskItem
+          key={index}
+          task={task}
+          onEdit={() => {
+            setForm({
+              task_id: task.task_id,
+              title: task.title,
+              description: task.description,
+              deadline: task.deadline,
+            });
+            setUpdateModalVisibility(true);
+          }}
+        />
+      ))
+    ) : (
+      <p>No tasks.</p>
+    );
+  };
+
   const [index, setIndex] = useState(0); // 0 - completed | 1 - incompleted | 2 - all
   const pages = [
     <>
-      {tasks
-        ?.filter((task: TaskProps) => task.completed && filterByDate(task))
-        .map((task: TaskProps, index: number) => (
-          <TaskItem
-            key={index}
-            task={task}
-            onEdit={() => {
-              setForm({
-                task_id: task.task_id,
-                title: task.title,
-                description: task.description,
-                deadline: task.deadline,
-              });
-              setUpdateModalVisibility(true);
-            }}
-          />
-        ))}
+      {renderTasks(
+        tasks?.filter((task) => task.completed && filterByDate(task)) ?? []
+      )}
     </>,
     <>
-      {tasks
-        ?.filter((task: TaskProps) => !task.completed && filterByDate(task))
-        .map((task: TaskProps, index: number) => (
-          <TaskItem
-            key={index}
-            task={task}
-            onEdit={() => {
-              setForm({
-                task_id: task.task_id,
-                title: task.title,
-                description: task.description,
-                deadline: task.deadline,
-              });
-              setUpdateModalVisibility(true);
-            }}
-          />
-        ))}
+      {renderTasks(
+        tasks?.filter((task) => !task.completed && filterByDate(task)) ?? []
+      )}
     </>,
-    <>
-      {tasks
-        ?.filter((task: TaskProps) => filterByDate(task))
-        .map((task: TaskProps, index: number) => (
-          <TaskItem
-            key={index}
-            task={task}
-            onEdit={() => {
-              setForm({
-                task_id: task.task_id,
-                title: task.title,
-                description: task.description,
-                deadline: task.deadline,
-              });
-              setUpdateModalVisibility(true);
-            }}
-          />
-        ))}
-    </>,
+    <>{renderTasks(tasks?.filter((task) => filterByDate(task)) ?? [])}</>,
   ];
 
   useEffect(() => {

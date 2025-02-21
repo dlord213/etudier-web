@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FileUpload } from "@/components/ui/file-upload";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@/supabase/client";
 import { Dispatch, SetStateAction, useState } from "react";
 import {
+  MdAdd,
   MdArrowLeft,
   MdClose,
   MdError,
@@ -43,9 +45,13 @@ export const SummarizePDF = ({
 
 export const SearchModule = ({
   setIndex,
+  user_id,
 }: {
   setIndex?: Dispatch<SetStateAction<number>>;
+  user_id: any;
 }) => {
+  const instance = createClient();
+
   const date = new Date().toISOString().split("T")[0];
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
     minHeight: 52,
@@ -53,7 +59,7 @@ export const SearchModule = ({
   });
 
   const [prompt, setPrompt] = useState("");
-  const [yearFilter, setYearFilter] = useState("");
+  const [yearFilter, setYearFilter] = useState("2020-01-01");
   const [isGenerating, setIsGenerating] = useState(0);
   const [results, setResults] = useState<
     { title: string; description: string; link: string }[] | { error: string }
@@ -62,10 +68,10 @@ export const SearchModule = ({
   const handleGenerate = async () => {
     if (!prompt) return;
 
-    const predefinedPrompt = `I wanna get academic articles/papers/modules and the generated data must be formatted into something like this {title: str, description: str, link: str, author: str}, must be atleast 15 data. Make sure it's from a reliable academic databases such as Google Scholar/PubMed. Don't return any links that redirects to a search engine, links must be that's redirected directly to an article/paper. Don't return any text, simply return an array with the object format I gave. If the prompt isn't related to searching paper/modules/subjects then return an appropriate result that's formatted like this {error: put an appropriate string here saying that the prompt isn't valid or isn't related on generating paper/modules/subjects or there aren't any academic papers/modules/articles.}.
+    const predefinedPrompt = `I wanna get academic articles/papers/modules and the generated data must be formatted into something like this {title: str, description: str, link: str, author: str}, must be atleast 30 data. Make sure it's from a reliable academic databases such as Google Scholar/PubMed. Don't return any links that redirects to a search engine, links must be that's redirected directly to an article/paper. Don't return any text, simply return an array with the object format I gave. If the prompt isn't related to searching paper/modules/subjects then return an appropriate result that's formatted like this {error: put an appropriate string here saying that the prompt isn't valid or isn't related on generating paper/modules/subjects or there aren't any academic papers/modules/articles.}.
 
     Prompt: ${prompt}
-    Filter: Date > or above ${yearFilter}`;
+    Filter: Date of the article/paper/module above ${yearFilter}`;
 
     setIsGenerating(1);
     const resultResponse = await model.generateContent(predefinedPrompt);
@@ -90,6 +96,23 @@ export const SearchModule = ({
       setResults(parsed);
       setIsGenerating(2);
     }
+  };
+
+  const handleAddModule = async ({
+    title,
+    description,
+    link,
+  }: {
+    title: string;
+    description: string;
+    link: string;
+  }) => {
+    await instance.from("module").insert({
+      title: title,
+      description: description,
+      link: link,
+      user_id: user_id,
+    });
   };
 
   return (
@@ -238,14 +261,28 @@ export const SearchModule = ({
                   description: string;
                   link: string;
                 }) => (
-                  <LinkPreview
-                    url={item.link}
-                    className="flex flex-col bg-stone-100 p-4 rounded-md dark:bg-stone-700"
-                    key={item.link}
-                  >
-                    <h1 className="font-bold text-2xl">{item.title}</h1>
-                    <h1 className="text-sm">{item.description}</h1>
-                  </LinkPreview>
+                  <div className="flex flex-row gap-2" key={item.link}>
+                    <LinkPreview
+                      url={item.link}
+                      className="flex flex-col bg-stone-100 p-4 rounded-md dark:bg-stone-700"
+                    >
+                      <h1 className="font-bold text-2xl">{item.title}</h1>
+                      <h1 className="text-sm">{item.description}</h1>
+                    </LinkPreview>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleAddModule({
+                          description: item.description,
+                          link: item.link,
+                          title: item.title,
+                        });
+                      }}
+                      className="md:block hidden cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-[#d75c77] hover:text-stone-100 shadow dark:shadow-none hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2"
+                    >
+                      <MdAdd size={28} />
+                    </button>
+                  </div>
                 )
               )}
           </div>

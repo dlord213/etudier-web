@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { createClient } from "@/supabase/client";
 import { AddModule, SearchModule, SummarizePDF } from "./components";
@@ -17,9 +18,7 @@ export default function ClientSideLayout({
   user,
   serverModules,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   user: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   serverModules: any;
 }) {
   const instance = createClient();
@@ -80,13 +79,13 @@ export default function ClientSideLayout({
         </div>
         <div className="flex flex-row gap-2">
           <button
-            className="md:block hidden cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-[#d75c77] hover:text-stone-100 shadow dark:shadow-none hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
+            className="md:block hidden cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-[#d75c77] hover:text-stone-100 shadow dark:shadow-none hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2"
             onClick={() => setIndex(1)}
           >
             <MdOutlineSummarize size={24} />
           </button>
           <button
-            className="md:block hidden cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-[#d75c77] hover:text-stone-100 shadow dark:shadow-none hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
+            className="md:block hidden cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-[#d75c77] hover:text-stone-100 shadow dark:shadow-none hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2"
             onClick={() => setIndex(3)}
           >
             <MdSearch size={24} />
@@ -122,7 +121,7 @@ export default function ClientSideLayout({
       <AddModule setIndex={setIndex} user_id={user_id} />
     </>,
     <>
-      <SearchModule setIndex={setIndex} />
+      <SearchModule setIndex={setIndex} user_id={user_id} />
     </>,
   ];
 
