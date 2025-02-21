@@ -3,8 +3,9 @@ import Link from "next/link";
 import register from "./actions";
 import { useSearchParams } from "next/navigation";
 import { MdInfo } from "react-icons/md";
+import { Suspense } from "react";
 
-export default function Page() {
+function MainPage() {
   const params = useSearchParams();
   const server_error_msg = params.get("message");
 
@@ -69,5 +70,13 @@ export default function Page() {
         </form>
       </div>
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <MainPage />
+    </Suspense>
   );
 }

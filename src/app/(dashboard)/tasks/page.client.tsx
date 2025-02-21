@@ -136,7 +136,8 @@ export default function ClientSideLayout({
           table: "task",
           schema: "public",
         },
-        (payload) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (payload: any) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setTasks((prevTasks: any[]) => {
             const task_id = payload.new?.task_id || payload.old?.task_id;

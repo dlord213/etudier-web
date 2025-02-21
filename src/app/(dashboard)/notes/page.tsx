@@ -14,7 +14,7 @@ export default async function Page() {
 
   return (
     <main className="flex flex-col min-h-screen">
-      <ClientSideLayout user={user} serverNotes={notes.data ?? []} />
+      <ClientSideLayout serverNotes={notes.data ?? []} />
     </main>
   );
 }

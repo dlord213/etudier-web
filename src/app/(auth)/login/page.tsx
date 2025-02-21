@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import login from "./actions";
-import { MdInfo } from "react-icons/md";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { MdInfo } from "react-icons/md";
 
-export default function Page() {
+function MainPage() {
   const params = useSearchParams();
   const server_error_msg = params.get("message");
 
@@ -59,5 +60,13 @@ export default function Page() {
         )}
       </form>
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <MainPage />
+    </Suspense>
   );
 }

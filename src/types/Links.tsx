@@ -1,12 +1,10 @@
 import { logout } from "@/app/(auth)/login/actions";
-import { ReactElement, ReactNode } from "react";
-import { IconType } from "react-icons/lib";
+import { ReactNode } from "react";
 import {
   MdTaskAlt,
   MdNote,
   MdQuiz,
   MdQuestionAnswer,
-  MdLibraryBooks,
   MdLogout,
   MdSummarize,
 } from "react-icons/md";

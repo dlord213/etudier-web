@@ -38,9 +38,9 @@ const FloatingDockMobile = ({
   className,
 }: {
   items: {
-    title: string;
-    icon: React.ReactNode;
-    href: string;
+    title?: string;
+    icon?: React.ReactNode;
+    href?: string;
     onClickFunction?: () => void;
   }[];
   className?: string;
@@ -128,9 +128,9 @@ const FloatingDockDesktop = ({
   className,
 }: {
   items: {
-    title: string;
-    icon: React.ReactNode;
-    href: string;
+    title?: string;
+    icon?: React.ReactNode;
+    href?: string;
     onClickFunction?: () => void;
   }[];
   className?: string;
@@ -160,9 +160,9 @@ function IconLinkContainer({
   onClickFunction,
 }: {
   mouseX: MotionValue;
-  title: string;
-  icon: React.ReactNode;
-  href: string;
+  title?: string;
+  icon?: React.ReactNode;
+  href?: string;
   onClickFunction?: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);

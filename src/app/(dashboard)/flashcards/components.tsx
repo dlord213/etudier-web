@@ -599,7 +599,7 @@ export const FlashcardAddPage = ({
   const handleDelete = (delIndex: number) => {
     setJSON((prev: any) => {
       if (Array.isArray(json)) {
-        return prev.filter((_, i: number) => i !== delIndex);
+        return prev.filter((_: any, i: number) => i !== delIndex);
       }
     });
     setIndex((prev) => (prev > 0 ? prev - 1 : 0));

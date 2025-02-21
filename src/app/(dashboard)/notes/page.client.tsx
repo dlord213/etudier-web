@@ -23,7 +23,6 @@ import links from "@/types/Links";
 export default function ClientSideLayout({
   serverNotes,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   serverNotes: NoteProps[];
 }) {
   const [html, setHTML] = useState("");

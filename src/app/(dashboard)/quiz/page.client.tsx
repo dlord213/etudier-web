@@ -35,7 +35,7 @@ export default function ClientSideLayout({
           table: "quiz",
           schema: "public",
         },
-        (payload) => {
+        (payload: any) => {
           setQuizzes((prevQuizzes: any[]) => {
             const quizId = payload.new?.quiz_id || payload.old?.quiz_id;
 

@@ -9,7 +9,7 @@ interface Color {
   700: string;
   800: string;
   900: string;
-  950: string;
+  950?: string;
   A100?: string;
   A200?: string;
   A400?: string;
