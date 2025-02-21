@@ -17,7 +17,6 @@ import { addFlashcard, deleteFlashcard } from "./actions";
 import { FlashcardProps } from "@/types/Flashcard";
 import model from "@/lib/ai";
 import { ThreeDot } from "react-loading-indicators";
-import AIInput_01 from "@/components/kokonutui/ai-input-01";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
@@ -48,7 +47,7 @@ export const Flashcard = ({
       >
         {/* Front Side */}
         <div
-          className="absolute inset-0 flex items-center justify-center rounded-md bg-gray-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300"
+          className="absolute inset-0 flex items-center justify-center rounded-md bg-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300"
           style={{
             WebkitBackfaceVisibility: "hidden",
             backfaceVisibility: "hidden",
@@ -60,7 +59,7 @@ export const Flashcard = ({
         </div>
         {/* Back Side */}
         <div
-          className="absolute inset-0 flex items-center justify-center rounded-md bg-gray-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300"
+          className="absolute inset-0 flex items-center justify-center rounded-md bg-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300"
           style={{
             transform: "rotateX(180deg)",
             WebkitBackfaceVisibility: "hidden",
@@ -116,20 +115,20 @@ export const FlashcardModalSheet = ({
         <input type="hidden" value={flashcard_id} name="flashcard_id" />
         <MdClose
           size={28}
-          className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+          className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
           onClick={handleClose}
         />
         <div className="flex flex-row gap-4 items-center">
           {!isListVisible ? (
             <MdList
               size={28}
-              className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
               onClick={() => setIsListVisible(true)}
             />
           ) : (
             <MdStayCurrentLandscape
               size={28}
-              className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
               onClick={() => setIsListVisible(false)}
             />
           )}
@@ -137,7 +136,7 @@ export const FlashcardModalSheet = ({
             <button type="submit">
               <MdDelete
                 size={28}
-                className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+                className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
               />
             </button>
           )}
@@ -153,7 +152,7 @@ export const FlashcardModalSheet = ({
               card.map((card: CardProps, index: number) => (
                 <div
                   key={index}
-                  className="flex flex-row gap-2 p-4 dark:bg-stone-800 rounded-md"
+                  className="flex flex-row gap-2 p-4 dark:bg-stone-800 rounded-md bg-stone-100"
                 >
                   <div className="flex flex-row gap-4 items-center">
                     <MdPlayCircle
@@ -177,7 +176,7 @@ export const FlashcardModalSheet = ({
               backContent={card[modalIndex].answer}
             />
           ) : (
-            <div className="flex lg:h-[25vh] md:h-[35vh] h-[50vh] items-center justify-center rounded-md bg-gray-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300">
+            <div className="flex lg:h-[25vh] md:h-[35vh] h-[50vh] items-center justify-center rounded-md bg-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300">
               <h1>Select a card</h1>
             </div>
           )}
@@ -190,7 +189,7 @@ export const FlashcardModalSheet = ({
               backContent={card[modalIndex].answer}
             />
           ) : (
-            <div className="flex lg:h-[25vh] md:h-[35vh] h-[50vh] items-center justify-center rounded-md bg-gray-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300">
+            <div className="flex lg:h-[25vh] md:h-[35vh] h-[50vh] items-center justify-center rounded-md bg-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 p-4 transition-all delay-0 duration-300">
               <h1>Flashcards done.</h1>
             </div>
           )}
@@ -636,15 +635,13 @@ export const FlashcardAddPage = ({
           <button type="submit">
             <MdSave
               size={28}
-              color={"#fefefe"}
-              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md flex-shrink-0"
+              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
             />
           </button>
         ) : (
           <MdClose
             size={28}
-            color={"#fefefe"}
-            className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md flex-shrink-0"
+            className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
             onClick={() => setPageIndex(0)}
           />
         )}
@@ -672,14 +669,14 @@ export const FlashcardAddPage = ({
             placeholder="Answer..."
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
-            className="p-4 rounded-lg outline-none dark:bg-stone-700"
+            className="p-4 rounded-lg outline-none bg-stone-100 dark:bg-stone-700 resize-none"
             draggable={false}
             maxLength={150}
           />
           <button
             type="button"
             onClick={handleAddFlashcard}
-            className="flex flex-row justify-center gap-2 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2 "
+            className="flex flex-row justify-center gap-2 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2 bg-stone-100 hover:bg-stone-200"
           >
             <MdAdd size={24} />
             <p>Add card</p>
@@ -712,7 +709,7 @@ export const FlashcardAddPage = ({
                 <div className="flex flex-row lg:gap-4 gap-2">
                   <button
                     type="button"
-                    className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
+                    className="cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-stone-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
                     onClick={() =>
                       setIndex((prev) => (prev - 1 + json.length) % json.length)
                     }
@@ -721,7 +718,7 @@ export const FlashcardAddPage = ({
                   </button>
                   <button
                     type="button"
-                    className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
+                    className="cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-stone-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
                     onClick={() => setIndex((prev) => (prev + 1) % json.length)}
                   >
                     <MdArrowRight size={24} />
@@ -729,7 +726,7 @@ export const FlashcardAddPage = ({
                 </div>
                 <button
                   type="button"
-                  className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
+                  className="cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:bg-stone-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-800 rounded-md px-4 py-2"
                   onClick={handleCancel}
                 >
                   Cancel

@@ -21,11 +21,9 @@ import { FloatingDock } from "@/components/ui/floating-dock";
 import links from "@/types/Links";
 
 export default function ClientSideLayout({
-  user,
   serverNotes,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any;
   serverNotes: NoteProps[];
 }) {
   const [html, setHTML] = useState("");
@@ -96,7 +94,7 @@ export default function ClientSideLayout({
     return () => {
       instance.removeChannel(channel);
     };
-  }, [instance, user.data.user.id]);
+  }, [instance]);
 
   return (
     <>
@@ -106,8 +104,7 @@ export default function ClientSideLayout({
             <div className="flex flex-row gap-4 items-center">
               <MdAdd
                 size={28}
-                color={"#fefefe"}
-                className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+                className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
                 onClick={() => setNoteVisibility(true)}
               />
               <h1 className="font-bold lg:text-3xl text-xl">Notes</h1>
@@ -115,7 +112,7 @@ export default function ClientSideLayout({
             <div className="flex flex-row gap-4 flex-wrap">
               {notes?.map((note: NoteProps) => (
                 <div
-                  className="flex flex-col w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+                  className="flex flex-col w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] bg-stone-50 shadow hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
                   key={note.note_id}
                   onClick={() => {
                     setIsEditing(true);
@@ -177,7 +174,7 @@ export default function ClientSideLayout({
               />
             </div>
             <div className="flex flex-1 flex-row gap-4 my-4">
-              <div className="hidden lg:flex flex-col gap-4 dark:bg-stone-800 rounded-md p-2 h-fit">
+              <div className="hidden lg:flex flex-col gap-4 bg-stone-50 shadow dark:shadow-none dark:bg-stone-800 rounded-md p-2 h-fit">
                 <button
                   onClick={() =>
                     editor!.chain().focus().toggleHeading({ level: 1 }).run()
@@ -281,14 +278,14 @@ export default function ClientSideLayout({
                   <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleBold().run()}
-                    className="px-2 py-1 hover:bg-stone-600 rounded"
+                    className="px-2 py-1 hover:bg-stone-100 dark:hover:bg-stone-600 rounded"
                   >
                     Bold
                   </button>
                   <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleItalic().run()}
-                    className="px-2 py-1 hover:bg-stone-600 rounded"
+                    className="px-2 py-1 hover:bg-stone-100 dark:hover:bg-stone-600 rounded"
                   >
                     Italic
                   </button>
@@ -297,7 +294,7 @@ export default function ClientSideLayout({
                     onClick={() =>
                       editor.chain().focus().toggleHeading({ level: 2 }).run()
                     }
-                    className="px-2 py-1 hover:bg-stone-600 rounded"
+                    className="px-2 py-1 hover:bg-stone-100 dark:hover:bg-stone-600 rounded"
                   >
                     H2
                   </button>

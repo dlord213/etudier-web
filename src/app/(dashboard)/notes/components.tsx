@@ -11,6 +11,7 @@ import {
 } from "react-icons/rx";
 import { updateNote, addNote } from "./actions";
 import { SetStateAction, Dispatch, useState } from "react";
+import { NoteProps } from "@/types/Note";
 
 export const MenuBar = ({ editor }: { editor: Editor }) => {
   if (!editor) {
@@ -428,4 +429,22 @@ export const NoteEditor = ({
         </div>
       </form>
     );
+};
+
+export const NoteComponent = ({
+  note,
+  onClick,
+}: {
+  note: NoteProps;
+  onClick: () => void;
+}) => {
+  return (
+    <div
+      className="flex flex-col w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+      key={note.note_id}
+      onClick={onClick}
+    >
+      <h1>{note.title}</h1>
+    </div>
+  );
 };

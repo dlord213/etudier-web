@@ -4,16 +4,21 @@
 
 :root {
   --code-background: #44403c;
+  --foreground: #242424;
 }
 
 @media (prefers-color-scheme: dark) {
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
+  :root {
+    --foreground: #fbfbfb;
+  }
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  color: var(--foreground);
 }
 .tiptap {
   :first-child {

@@ -38,8 +38,7 @@ export default function ClientSideLayout({
         <div className="flex flex-row gap-4 items-center">
           <MdAdd
             size={28}
-            color={"#fefefe"}
-            className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md flex-shrink-0"
+            className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
             onClick={() => setIndex(2)}
           />
           <div className="flex flex-col">
@@ -51,14 +50,14 @@ export default function ClientSideLayout({
         </div>
         <input
           type="text"
-          className="border dark:border-none dark:bg-stone-700 p-4 text-sm rounded-3xl outline-none dark:focus:ring-stone-700 lg:w-fit w-full"
+          className="hidden bg-stone-100 dark:border-none dark:bg-stone-700 p-4 text-sm rounded-3xl outline-none dark:focus:ring-stone-700 lg:w-fit w-full"
           placeholder="Search for flashcard"
         />
       </div>
       <div className="flex flex-row flex-wrap gap-2">
         {flashcards?.map((card: FlashcardProps) => (
           <div
-            className="flex flex-col gap-4 w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+            className="flex flex-col gap-4 w-fit lg:max-w-[160px] bg-stone-100 p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer dark:shadow-none shadow"
             key={card.flashcard_id}
             onClick={() => {
               setJSON(card);
@@ -70,7 +69,7 @@ export default function ClientSideLayout({
           </div>
         ))}
         <div
-          className="flex flex-row gap-2 items-center w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+          className="flex flex-row gap-2 items-center w-fit lg:max-w-[160px] bg-stone-100 p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer dark:shadow-none shadow"
           onClick={() => {
             setIndex(3);
             setJSON([]);
@@ -86,7 +85,7 @@ export default function ClientSideLayout({
         setIndex={setIndex}
         json={json}
         setJSON={setJSON}
-        user_id={user.data.user.id}
+        user_id={user.id}
       />
     </>,
     <>
@@ -143,7 +142,7 @@ export default function ClientSideLayout({
     return () => {
       instance.removeChannel(channel);
     };
-  }, [instance, user.data.user.id]);
+  }, [instance]);
 
   useEffect(() => {
     setTimeout(() => {

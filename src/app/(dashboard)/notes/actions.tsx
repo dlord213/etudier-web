@@ -4,17 +4,16 @@ import { createClient } from "@/supabase/server";
 
 export async function addNote(formData: FormData) {
   const instance = await createClient();
-  const { data } = await instance.auth.getUser();
+  const user = (await instance.auth.getSession()).data.session?.user;
 
   const form = {
     title: formData.get("title") as string,
     html: formData.get("note") as string,
   };
 
-
   const { error } = await instance
     .from("note")
-    .insert({ ...form, user_id: data.user.id });
+    .insert({ ...form, user_id: user?.id });
 
   if (error) {
     console.error("Error adding note:", error);

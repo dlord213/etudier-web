@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const instance = await createClient();
-  const user = await instance.auth.getUser();
+  const user = (await instance.auth.getSession()).data.session?.user;
   const quizzes = await instance
     .from("quiz")
     .select("title, description, user_id ( id, username ), quizzes");

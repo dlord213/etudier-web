@@ -22,6 +22,7 @@ export const FileUpload = ({
     extensions: [StarterKit],
     content: summary ? marked(summary) : "",
     editable: false,
+    immediatelyRender: false,
   });
 
   useEffect(() => {
@@ -93,8 +94,7 @@ export const FileUpload = ({
     multiple: false,
     noClick: true,
     onDrop: handleFileChange,
-    onDropRejected: (error) => {
-    },
+    onDropRejected: (error) => {},
   });
 
   return (
@@ -102,7 +102,7 @@ export const FileUpload = ({
       <motion.div
         onClick={handleClick}
         whileHover="animate"
-        className="p-10 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden border border-dashed dark:border-stone-700"
+        className="p-10 group/file block rounded-lg cursor-pointer w-full relative overflow-hidden border border-dashed border-stone-300 dark:border-stone-700"
       >
         <input
           ref={fileInputRef}
@@ -125,7 +125,7 @@ export const FileUpload = ({
         </p>
       )}
       {summary && (
-        <div className="mt-4 p-4 rounded-md dark:bg-stone-700">
+        <div className="mt-4 p-4 rounded-md bg-stone-100 dark:bg-stone-700">
           <h3 className="font-bold mb-2 lg:text-2xl dark:text-stone-200">
             Summary
           </h3>

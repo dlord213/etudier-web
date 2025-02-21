@@ -22,7 +22,7 @@ export default async function Home() {
             <input
               type="email"
               name="email"
-              className="border dark:border-none dark:bg-stone-700 p-4 text-sm rounded-lg ps-2.5 outline-none dark:focus:ring-stone-700"
+              className="border-none bg-zinc-200 dark:bg-stone-700 p-4 text-sm rounded-lg ps-2.5 outline-none dark:focus:ring-stone-700"
               placeholder="john@etudier.com"
               required
             />
@@ -32,7 +32,7 @@ export default async function Home() {
             <input
               type="password"
               name="password"
-              className="border dark:border-none dark:bg-stone-700 p-4 text-sm rounded-lg ps-2.5 outline-none dark:focus:ring-stone-700"
+              className="border-none bg-zinc-200 dark:bg-stone-700 p-4 text-sm rounded-lg ps-2.5 outline-none dark:focus:ring-stone-700"
               placeholder="***********"
               required
             />

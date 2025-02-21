@@ -166,7 +166,7 @@ export default function ClientSideLayout({
     return () => {
       instance.removeChannel(channel);
     };
-  }, [instance, user.data.user.id]);
+  }, [instance]);
 
   return (
     <>
@@ -175,8 +175,7 @@ export default function ClientSideLayout({
           <div className="flex flex-row gap-4 items-center">
             <MdAdd
               size={28}
-              color={"#fefefe"}
-              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
               onClick={() => setAddModalVisilibity(true)}
             />
             <h1 className="font-bold lg:text-3xl text-xl">Tasks</h1>

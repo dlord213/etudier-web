@@ -56,7 +56,6 @@ export const AddQuizComponent = ({
     setIndex(0);
     if (error) console.error("Error uploading quiz:", error);
     else {
-      console.log("Quiz uploaded successfully:", data);
       setQuiz([]);
     }
   };
@@ -80,6 +79,7 @@ export const AddQuizComponent = ({
           <MdClose
             size={32}
             className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
+            onClick={() => setIndex(0)}
           />
         )}
         <input
@@ -101,13 +101,13 @@ export const AddQuizComponent = ({
       />
 
       <div className="flex flex-col"></div>
-      <div className="flex flex-col gap-4 p-4 dark:bg-stone-800 rounded-md">
+      <div className="flex flex-col gap-4 p-4 bg-stone-100 dark:bg-stone-800 rounded-md">
         <input
           type="text"
           placeholder="Put your question here..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          className="outline-none lg:text-xl dark:bg-stone-800"
+          className="outline-none lg:text-xl bg-stone-100 dark:bg-stone-800"
           maxLength={150}
         />
         <div className="flex flex-row gap-4">
@@ -138,7 +138,7 @@ export const AddQuizComponent = ({
       <button
         type="button"
         onClick={handleAddQuestion}
-        className="flex flex-row justify-center gap-2 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2 "
+        className="flex flex-row justify-center gap-2 cursor-pointer transition-all delay-0 duration-200 bg-stone-100 hover:dark:text-stone-100 dark:bg-stone-800 hover:dark:bg-stone-700 rounded-md px-4 py-2 "
       >
         <MdAdd size={24} />
         <p>Add question</p>
@@ -148,7 +148,7 @@ export const AddQuizComponent = ({
       {quiz.map((q, idx) => (
         <div
           key={idx}
-          className="flex flex-col gap-2 p-4 dark:bg-stone-800 rounded-md"
+          className="flex flex-col gap-2 p-4 bg-stone-100 dark:bg-stone-800 rounded-md"
         >
           <div className="flex justify-between items-center">
             <h1 className="font-bold text-2xl">{q.question}</h1>
@@ -514,8 +514,7 @@ export const AnswerUserQuizComponent = ({
           <div className="flex flex-row gap-4 items-center">
             <MdArrowLeft
               size={28}
-              color={"#fefefe"}
-              className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md flex-shrink-0"
+              className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
               onClick={() => {
                 setIndex(0);
               }}
@@ -531,7 +530,7 @@ export const AnswerUserQuizComponent = ({
             {isQuizDone && (
               <button
                 type="button"
-                className="flex flex-row gap-2 items-center disabled:cursor-default disabled:dark:bg-stone-900 cursor-pointer transition-all duration-200 hover:dark:text-stone-100 dark:bg-stone-700 hover:dark:bg-stone-800 rounded-md lg:p-4 px-4 py-2"
+                className="flex flex-row gap-2 items-center disabled:cursor-default disabled:dark:bg-stone-900 cursor-pointer transition-all duration-200 hover:dark:text-stone-100 dark:bg-stone-700 hover:dark:bg-stone-800 rounded-md bg-stone-100 hover:bg-stone-200 lg:p-4 px-4 py-2"
                 onClick={() => {
                   setUserAnswers([]);
                   setIsQuizDone(false);
@@ -542,7 +541,7 @@ export const AnswerUserQuizComponent = ({
             )}
             <button
               type="button"
-              className="flex flex-row gap-2 items-center disabled:cursor-default disabled:dark:bg-stone-900 cursor-pointer transition-all duration-200 hover:dark:text-stone-100 dark:bg-stone-700 hover:dark:bg-stone-800 rounded-md lg:p-4 px-4 py-2"
+              className="flex flex-row gap-2 items-center disabled:cursor-default disabled:dark:bg-stone-900 cursor-pointer transition-all duration-200 hover:dark:text-stone-100 dark:bg-stone-700 hover:dark:bg-stone-800 rounded-md bg-stone-100 hover:bg-stone-200 lg:p-4 px-4 py-2"
               onClick={() => setIsQuizDone(true)}
               disabled={isQuizDone}
             >
@@ -568,7 +567,7 @@ export const AnswerUserQuizComponent = ({
                     <button
                       key={`answer-${quizIndex}-${answerIndex}`}
                       type="button"
-                      className={`px-2 py-4 dark:bg-stone-700 dark:hover:bg-stone-800 transition-all duration-200 rounded-md ${
+                      className={`px-2 py-4 bg-stone-100 hover:bg-stone-200 dark:bg-stone-700 dark:hover:bg-stone-800 transition-all duration-200 rounded-md ${
                         userAnswers[quizIndex] === answerIndex
                           ? "bg-green-500 dark:bg-stone-800"
                           : "disabled:dark:bg-stone-900"
@@ -581,15 +580,15 @@ export const AnswerUserQuizComponent = ({
                   ))}
                 </div>
                 {isQuizDone && (
-                  <div className="flex p-4 items-center dark:bg-stone-800 rounded-md gap-4">
+                  <div className="flex p-4 items-center bg-stone-100 dark:bg-stone-800 rounded-md gap-4">
                     {userAnswers[quizIndex] === quiz.correct_answer ? (
                       <>
-                        <MdCheck size={28} color="#fefefe" />
+                        <MdCheck size={28} />
                         <p>Your answer is correct.</p>
                       </>
                     ) : (
                       <>
-                        <MdError size={28} color="#fefefe" />
+                        <MdError size={28} />
                         <p>
                           Your answer is incorrect. The correct answer was{" "}
                           {quiz.answers[quiz.correct_answer]}.

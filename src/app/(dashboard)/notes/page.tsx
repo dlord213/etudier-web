@@ -9,11 +9,8 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const instance = await createClient();
-  const user = await instance.auth.getUser();
-  const notes = await instance
-    .from("note")
-    .select("*")
-    .eq("user_id", user.data.user?.id);
+  const user = (await instance.auth.getSession()).data.session?.user;
+  const notes = await instance.from("note").select("*").eq("user_id", user?.id);
 
   return (
     <main className="flex flex-col min-h-screen">

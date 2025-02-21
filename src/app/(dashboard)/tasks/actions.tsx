@@ -4,7 +4,7 @@ import { createClient } from "@/supabase/server";
 
 export async function addTask(formData: FormData) {
   const instance = await createClient();
-  const { data } = await instance.auth.getUser();
+  const user = (await instance.auth.getSession()).data.session?.user;
 
   const form = {
     title: formData.get("title") as string,
@@ -14,7 +14,7 @@ export async function addTask(formData: FormData) {
 
   const { error } = await instance
     .from("task")
-    .insert({ ...form, user_id: data.user.id });
+    .insert({ ...form, user_id: user?.id });
 
   if (error) {
     console.error("Error inserting task:", error);
@@ -24,7 +24,6 @@ export async function addTask(formData: FormData) {
 
 export async function updateTask(formData: FormData) {
   const instance = await createClient();
-  const { data } = await instance.auth.getUser();
 
   const form = {
     title: formData.get("title") as string,

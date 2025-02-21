@@ -63,7 +63,7 @@ export default function ClientSideLayout({
     return () => {
       instance.removeChannel(channel);
     };
-  }, [instance, user.data.user.id]);
+  }, [instance]);
 
   // Wrap each page in a fragment with a unique key
   const pages = [
@@ -73,20 +73,19 @@ export default function ClientSideLayout({
         <div className="flex flex-row gap-4 items-center">
           <MdAdd
             size={28}
-            color={"#fefefe"}
-            className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md flex-shrink-0"
+            className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
             onClick={() => setIndex(3)}
           />
           <div className="flex flex-col">
             <h1 className="font-bold lg:text-3xl text-xl">Quiz</h1>
-            <p className="dark:text-stone-600 text-sm">
+            <p className="text-stone-400 dark:text-stone-600 text-sm">
               Note: Any quiz published is public.
             </p>
           </div>
         </div>
         <input
           type="text"
-          className="border dark:border-none dark:bg-stone-700 p-4 text-sm rounded-3xl outline-none dark:focus:ring-stone-700 lg:w-fit w-full"
+          className="hidden bg-stone-100 dark:bg-stone-700 p-4 text-sm rounded-3xl outline-none dark:focus:ring-stone-700 lg:w-fit w-full"
           placeholder="Search for quiz"
         />
       </div>
@@ -94,7 +93,7 @@ export default function ClientSideLayout({
         {quizzes?.map((quiz: QuizDataProps, quizIndex: number) => (
           <div
             key={quiz.quiz_id ? quiz.quiz_id : `quiz-${quizIndex}`}
-            className="flex flex-col gap-4 w-fit h-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+            className="flex flex-col gap-4 w-fit h-fit lg:max-w-[160px] p-3 bg-stone-100 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer dark:shadow-none shadow"
             onClick={() => {
               setJSON(quiz);
               setIndex(1);
@@ -104,10 +103,10 @@ export default function ClientSideLayout({
           </div>
         ))}
         <div
-          className="flex flex-row gap-2 items-center w-fit h-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+          className="flex flex-row gap-2 items-center w-fit h-fit lg:max-w-[160px] p-3 bg-stone-100 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer dark:shadow-none shadow"
           onClick={() => {
             setIndex(2);
-            setJSON(null);
+            setJSON(undefined);
           }}
         >
           <MdGeneratingTokens className="flex-shrink-0" size={24} />

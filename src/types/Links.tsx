@@ -40,9 +40,9 @@ const links: LinkProps[] = [
     href: "/quiz",
   },
   {
-    title: "Summarize",
+    title: "Modules",
     icon: <MdSummarize size={24} className="flex-shrink-0" />,
-    href: "/summarize",
+    href: "/modules",
   },
   {
     title: "Logout",
