@@ -41,5 +41,5 @@ export default async function register(formData: FormData) {
     );
   }
 
-  redirect("/dashboard/tasks");
+  redirect("/tasks");
 }
