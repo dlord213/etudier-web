@@ -6,10 +6,7 @@ import links from "@/types/Links";
 import { useEffect, useState } from "react";
 import {
   MdAdd,
-  MdList,
-  MdNoAccounts,
   MdNoBackpack,
-  MdNoCell,
   MdOutlineSummarize,
   MdSearch,
 } from "react-icons/md";
@@ -40,7 +37,8 @@ export default function ClientSideLayout({
           table: "module",
           schema: "public",
         },
-        (payload) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (payload: any) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setModules((prevModules: any[]) => {
             const module_id = payload.new?.module_id || payload.old?.module_id;

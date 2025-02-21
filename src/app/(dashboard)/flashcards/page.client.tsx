@@ -112,7 +112,7 @@ export default function ClientSideLayout({
           table: "flashcard",
           schema: "public",
         },
-        (payload) => {
+        (payload: any) => {
           setFlashcards((prevFlashcards: any[]) => {
             const cardId =
               payload.new?.flashcard_id || payload.old?.flashcard_id;

@@ -166,7 +166,9 @@ export const SearchModule = ({
                 "text-black dark:text-white text-nowrap"
               )}
               id="generateBtn"
-              onClick={async () => {}}
+              onClick={async () => {
+                await handleGenerate();
+              }}
             >
               <MdSend size={24} className="flex-shrink-0" />
             </button>
@@ -221,7 +223,9 @@ export const SearchModule = ({
                 "text-black dark:text-white text-nowrap"
               )}
               id="generateBtn"
-              onClick={async () => {}}
+              onClick={async () => {
+                await handleGenerate();
+              }}
             >
               <MdSend size={24} className="flex-shrink-0" />
             </button>
@@ -244,6 +248,57 @@ export const SearchModule = ({
                   </LinkPreview>
                 )
               )}
+          </div>
+        </>
+      )}
+      {isGenerating == 3 && (
+        <>
+          <div className="flex flex-row gap-2">
+            <Textarea
+              placeholder="Subjects? Topics?"
+              className={cn(
+                "bg-black/5 dark:bg-white/5 rounded-3xl pl-6 pr-16",
+                "placeholder:text-black/50 dark:placeholder:text-white/50",
+                "border-none ring-black/20 dark:ring-white/20",
+                "text-black dark:text-white text-wrap",
+                "overflow-y-auto resize-none",
+                "focus-visible:ring-0 focus-visible:ring-offset-0",
+                "transition-[height] duration-100 ease-out",
+                "leading-[1.2] py-[16px]",
+                "min-h-[52px]",
+                "max-h-[200px]"
+              )}
+              ref={textareaRef}
+              value={prompt}
+              onChange={(e) => {
+                setPrompt(e.target.value);
+                adjustHeight();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleGenerate();
+                }
+              }}
+            />
+            <button
+              className={cn(
+                "bg-black/5 dark:bg-white/5 rounded-3xl px-6",
+                "placeholder:text-black/50 dark:placeholder:text-white/50",
+                "border-none ring-black/20 dark:ring-white/20",
+                "text-black dark:text-white text-nowrap"
+              )}
+              id="generateBtn"
+              onClick={async () => {
+                await handleGenerate();
+              }}
+            >
+              <MdSend size={24} className="flex-shrink-0" />
+            </button>
+          </div>
+          <div className="flex flex-col items-center justify-center h-[50vh]">
+            <MdSearch size="10vw" />
+            <h1 className="font-black text-2xl">Find articles...</h1>
           </div>
         </>
       )}

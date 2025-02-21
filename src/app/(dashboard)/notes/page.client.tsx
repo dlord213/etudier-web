@@ -73,7 +73,8 @@ export default function ClientSideLayout({
           table: "note",
           schema: "public",
         },
-        (payload) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (payload: any) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setNotes((prevNotes: any[]) => {
             const index = prevNotes.findIndex(

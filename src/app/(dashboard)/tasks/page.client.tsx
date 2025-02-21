@@ -19,11 +19,8 @@ import {
 } from "./page.styles";
 
 export default function ClientSideLayout({
-  user,
   tasks: serverTasks,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  user: any;
   tasks: TaskProps[];
 }) {
   const instance = createClient();

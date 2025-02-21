@@ -48,7 +48,7 @@ export const AddQuizComponent = ({
   const handleSubmit = async () => {
     if (quiz.length === 0) return;
 
-    const { data, error } = await instance.from("quiz").insert({
+    const { error } = await instance.from("quiz").insert({
       title: title,
       description: description,
       quizzes: quiz,
@@ -99,8 +99,6 @@ export const AddQuizComponent = ({
         className="outline-none lg:text-xl"
         maxLength={150}
       />
-
-      <div className="flex flex-col"></div>
       <div className="flex flex-col gap-4 p-4 bg-stone-100 dark:bg-stone-800 rounded-md">
         <input
           type="text"
@@ -180,11 +178,8 @@ export const GenerateQuizComponent = ({
 }: {
   setIndex: Dispatch<SetStateAction<number>>;
 }) => {
-  const [result, setResult] = useState<
-    [QuizDataProps] & {
-      error: string;
-    }
-  >();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [result, setResult] = useState<any>();
 
   const { textareaRef, adjustHeight } = useAutoResizeTextarea({
     minHeight: 52,
@@ -214,6 +209,7 @@ export const GenerateQuizComponent = ({
 
     setIsGenerating(1);
     const resultResponse = await model.generateContent(predefinedPrompt);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let parsed: any;
     try {
       const trimmedString = (await resultResponse.response.text())
@@ -372,7 +368,8 @@ export const GenerateQuizComponent = ({
           {result![0]!.description}
           <p className="dark:text-stone-600 text-sm my-2">Quizzes</p>
           <div className="flex flex-col gap-2">
-            {result![0]!.quizzes.map((quiz, quizIndex: number) => (
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
+            {result![0]!.quizzes.map((quiz: any, quizIndex: number) => (
               <div
                 key={`result-question-${quizIndex}`}
                 className="flex flex-col gap-2"
@@ -381,7 +378,8 @@ export const GenerateQuizComponent = ({
                   <p>{quiz.question}</p>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  {quiz.userAnswers.map((answer, answerIndex) => (
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any*/}
+                  {quiz.userAnswers.map((answer: any, answerIndex: number) => (
                     <button
                       key={`result-answer-${quizIndex}-${answerIndex}`}
                       type="button"

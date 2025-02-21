@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CardProps } from "@/types/Card";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import {
@@ -81,9 +82,9 @@ export const FlashcardModalSheet = ({
   json,
   user_id,
 }: {
-  setJSON: Dispatch<SetStateAction<FlashcardProps | CardProps[]>>;
+  setJSON: Dispatch<SetStateAction<any>>;
   setIndex: Dispatch<SetStateAction<number>>;
-  json: FlashcardProps | CardProps[];
+  json: any;
   user_id: string;
 }) => {
   const [modalIndex, setModalIndex] = useState<number | null>(0);
@@ -570,9 +571,9 @@ export const FlashcardAddPage = ({
   setPageIndex,
 }: {
   setError: Dispatch<SetStateAction<string>>;
-  setJSON: Dispatch<SetStateAction<FlashcardProps | CardProps[]>>;
+  setJSON: Dispatch<SetStateAction<any>>;
   error: string;
-  json?: FlashcardProps | CardProps[];
+  json?: any;
   setPageIndex: Dispatch<SetStateAction<number>>;
 }) => {
   const [question, setQuestion] = useState("");
@@ -582,7 +583,7 @@ export const FlashcardAddPage = ({
   const handleAddFlashcard = () => {
     if (question.trim() && answer.trim()) {
       const newFlashcard = { question: question.trim(), answer: answer.trim() };
-      setJSON((prev) => [...prev, newFlashcard]);
+      setJSON((prev: any) => [...prev, newFlashcard]);
       setQuestion("");
       setAnswer("");
     }
@@ -596,14 +597,18 @@ export const FlashcardAddPage = ({
   };
 
   const handleDelete = (delIndex: number) => {
-    setJSON((prev) => prev.filter((_, i) => i !== delIndex));
+    setJSON((prev: any) => {
+      if (Array.isArray(json)) {
+        return prev.filter((_, i: number) => i !== delIndex);
+      }
+    });
     setIndex((prev) => (prev > 0 ? prev - 1 : 0));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
-    if (json.length < 2) {
+    if (json!.length < 2) {
       setError("Add at least two flashcards.");
       return;
     }
@@ -631,7 +636,7 @@ export const FlashcardAddPage = ({
       onSubmit={handleSubmit}
     >
       <div className="flex flex-row gap-4 items-center">
-        {json.length >= 1 ? (
+        {json!.length >= 1 ? (
           <button type="submit">
             <MdSave
               size={28}
@@ -683,7 +688,7 @@ export const FlashcardAddPage = ({
           </button>
         </div>
         <div className="flex flex-col gap-4">
-          {json.length >= 1 && (
+          {json!.length >= 1 && (
             <>
               <div className="relative">
                 {/* Delete button */}

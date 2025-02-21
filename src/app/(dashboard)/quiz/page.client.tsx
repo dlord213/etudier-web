@@ -15,10 +15,8 @@ import {
 } from "./components";
 
 export default function ClientSideLayout({
-  user,
   serverQuizzes,
 }: {
-  user: any;
   serverQuizzes: any;
 }) {
   const instance = createClient();
@@ -65,7 +63,6 @@ export default function ClientSideLayout({
     };
   }, [instance]);
 
-  // Wrap each page in a fragment with a unique key
   const pages = [
     <Fragment key="main">
       {/* Page 0: Quiz list */}
