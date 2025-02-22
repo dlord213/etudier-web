@@ -77,15 +77,21 @@ export default function ClientSideLayout({
         (payload: any) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           setNotes((prevNotes: any[]) => {
-            const index = prevNotes.findIndex(
-              (note: NoteProps) => note.note_id === payload.old.note_id
-            );
-            if (index !== -1) {
-              const updatedNotes = [...prevNotes];
-              updatedNotes[index] = payload.new;
-              return updatedNotes;
-            } else {
-              return [...prevNotes, payload.new];
+            const note_id = payload.new?.note_id || payload.old?.note_id;
+
+            switch (payload.eventType) {
+              case "DELETE":
+                return prevNotes.filter(
+                  (note: NoteProps) => note.note_id !== note_id
+                );
+              case "UPDATE":
+                return prevNotes.map((note: NoteProps) =>
+                  note.note_id === note_id ? payload.new : note
+                );
+              case "INSERT":
+                return [...prevNotes, payload.new];
+              default:
+                return prevNotes;
             }
           });
         }

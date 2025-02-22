@@ -228,7 +228,6 @@ export const GenerateQuizComponent = ({
         .replace(/^```json\s*/, "")
         .replace(/\s*```$/, "");
       parsed = JSON.parse(trimmedString);
-      console.log(parsed);
     } catch (error) {
       parsed = { error: "Failed to parse generated quiz data." + error };
     }

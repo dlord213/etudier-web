@@ -11,7 +11,7 @@ import {
   RxListBullet,
 } from "react-icons/rx";
 import { updateNote, addNote } from "./actions";
-import { SetStateAction, Dispatch, useState, useRef } from "react";
+import { SetStateAction, Dispatch, useState, useRef, useEffect } from "react";
 import { NoteProps } from "@/types/Note";
 import { createClient } from "@/supabase/client";
 
@@ -497,7 +497,7 @@ export const NoteComponent = ({
   const handleDelete = async () => {
     const note = notes.find((n: any) => n.note_id === contextMenu.noteId);
     if (note) {
-      await instance.from("note").delete().eq("note_id", note);
+      await instance.from("note").delete().eq("note_id", note.note_id);
     }
     setContextMenu({ ...contextMenu, visible: false });
   };
