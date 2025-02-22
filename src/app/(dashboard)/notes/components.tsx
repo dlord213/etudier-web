@@ -11,7 +11,7 @@ import {
   RxListBullet,
 } from "react-icons/rx";
 import { updateNote, addNote } from "./actions";
-import { SetStateAction, Dispatch, useState, useRef, useEffect } from "react";
+import { SetStateAction, Dispatch, useState, useRef } from "react";
 import { NoteProps } from "@/types/Note";
 import { createClient } from "@/supabase/client";
 
