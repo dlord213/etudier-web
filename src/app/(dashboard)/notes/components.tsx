@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BubbleMenu, Editor, EditorContent } from "@tiptap/react";
-import { MdSave, MdClose } from "react-icons/md";
+import { MdSave, MdClose, MdAdd } from "react-icons/md";
 import { RiCodeBlock } from "react-icons/ri";
 import {
   RxHeading,
@@ -10,8 +11,9 @@ import {
   RxListBullet,
 } from "react-icons/rx";
 import { updateNote, addNote } from "./actions";
-import { SetStateAction, Dispatch, useState } from "react";
+import { SetStateAction, Dispatch, useState, useRef } from "react";
 import { NoteProps } from "@/types/Note";
+import { createClient } from "@/supabase/client";
 
 export const MenuBar = ({ editor }: { editor: Editor }) => {
   if (!editor) {
@@ -432,19 +434,137 @@ export const NoteEditor = ({
 };
 
 export const NoteComponent = ({
-  note,
-  onClick,
+  notes,
+  setIsEditing,
+  setTitle,
+  setID,
+  setHTML,
+  setNoteVisibility,
+  editor,
 }: {
-  note: NoteProps;
-  onClick: () => void;
+  notes: any;
+  setIsEditing: any;
+  setTitle: any;
+  setID: any;
+  setHTML: any;
+  setNoteVisibility: any;
+  editor: any;
 }) => {
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    noteId: null,
+  });
+  const menuRef = useRef<any>(undefined);
+  const instance = createClient();
+
+  const handleRightClick = (event: any, note: any) => {
+    event.preventDefault();
+    setContextMenu({
+      visible: true,
+      x: event.pageX,
+      y: event.pageY,
+      noteId: note.note_id,
+    });
+  };
+
+  const handleLongPress = (event: any, note: any) => {
+    event.preventDefault();
+    setContextMenu({
+      visible: true,
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+      noteId: note.note_id,
+    });
+  };
+
+  const handleEdit = () => {
+    const note = notes.find((n: any) => n.note_id === contextMenu.noteId);
+    if (note) {
+      setIsEditing(true);
+      setTitle(note.title);
+      setID(note.note_id);
+      if (editor) {
+        editor.commands.setContent(note.html);
+        setHTML(note.html);
+      }
+      setNoteVisibility(true);
+    }
+    setContextMenu({ ...contextMenu, visible: false });
+  };
+
+  const handleDelete = async () => {
+    const note = notes.find((n: any) => n.note_id === contextMenu.noteId);
+    if (note) {
+      await instance.from("note").delete().eq("note_id", note);
+    }
+    setContextMenu({ ...contextMenu, visible: false });
+  };
+
+  const handleClickOutside = () => {
+    if (menuRef.current) {
+      setContextMenu({ ...contextMenu, visible: false });
+    }
+  };
+
+  document.addEventListener("click", handleClickOutside);
+
   return (
-    <div
-      className="flex flex-col w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
-      key={note.note_id}
-      onClick={onClick}
-    >
-      <h1>{note.title}</h1>
-    </div>
+    <>
+      <div className="flex flex-row gap-4 items-center">
+        <MdAdd
+          size={28}
+          className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
+          onClick={() => setNoteVisibility(true)}
+        />
+        <h1 className="font-bold lg:text-3xl text-xl">Notes</h1>
+      </div>
+      <div className="flex flex-row gap-4 flex-wrap">
+        {notes?.map((note: NoteProps) => (
+          <div
+            className="flex flex-col w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] bg-stone-50 shadow hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
+            key={note.note_id}
+            onContextMenu={(e) => handleRightClick(e, note)}
+            onTouchStart={(e) => {
+              e.persist();
+              setTimeout(() => handleLongPress(e, note), 500);
+            }}
+            onClick={() => {
+              setIsEditing(true);
+              setTitle(note.title);
+              setID(note.note_id);
+              if (editor) {
+                editor.commands.setContent(note.html);
+                setHTML(note.html);
+              }
+              setNoteVisibility(true);
+            }}
+          >
+            <h1>{note.title}</h1>
+          </div>
+        ))}
+      </div>
+      {contextMenu.visible && (
+        <ul
+          ref={menuRef}
+          className="absolute bg-stone-100 dark:bg-stone-800 shadow dark:shadow-none dark:border dark:border-stone-700 p-2 rounded-md"
+          style={{ top: contextMenu.y, left: contextMenu.x }}
+        >
+          <li
+            className="p-2 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer transition-all delay-0 duration-200 rounded-md"
+            onClick={handleEdit}
+          >
+            Edit
+          </li>
+          <li
+            className="p-2 hover:bg-stone-200 dark:hover:bg-stone-700 cursor-pointer transition-all delay-0 duration-200 rounded-md"
+            onClick={handleDelete}
+          >
+            Delete
+          </li>
+        </ul>
+      )}
+    </>
   );
 };

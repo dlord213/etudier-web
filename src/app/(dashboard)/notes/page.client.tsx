@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MdAdd, MdClose, MdSave } from "react-icons/md";
+import { MdClose, MdSave } from "react-icons/md";
 import StarterKit from "@tiptap/starter-kit";
 import { BubbleMenu, EditorContent, useEditor } from "@tiptap/react";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -19,6 +19,7 @@ import { createClient } from "@/supabase/client";
 import { NoteProps } from "@/types/Note";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import links from "@/types/Links";
+import { NoteComponent } from "./components";
 
 export default function ClientSideLayout({
   serverNotes,
@@ -100,36 +101,15 @@ export default function ClientSideLayout({
     <>
       <section className="flex flex-col lg:p-8 py-4 px-8 gap-2 flex-1 lg:max-w-3xl lg:mx-auto w-full">
         {!noteVisibility && (
-          <>
-            <div className="flex flex-row gap-4 items-center">
-              <MdAdd
-                size={28}
-                className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
-                onClick={() => setNoteVisibility(true)}
-              />
-              <h1 className="font-bold lg:text-3xl text-xl">Notes</h1>
-            </div>
-            <div className="flex flex-row gap-4 flex-wrap">
-              {notes?.map((note: NoteProps) => (
-                <div
-                  className="flex flex-col w-fit lg:max-w-[160px] p-3 hover:bg-[#d75c77] bg-stone-50 shadow hover:text-white dark:bg-stone-800 hover:dark:bg-stone-600 transition-colors rounded-md cursor-pointer"
-                  key={note.note_id}
-                  onClick={() => {
-                    setIsEditing(true);
-                    setTitle(note.title);
-                    setID(note.note_id);
-                    if (editor) {
-                      editor.commands.setContent(note.html);
-                      setHTML(note.html);
-                    }
-                    setNoteVisibility(true);
-                  }}
-                >
-                  <h1>{note.title}</h1>
-                </div>
-              ))}
-            </div>
-          </>
+          <NoteComponent
+            editor={editor}
+            notes={notes}
+            setHTML={setHTML}
+            setID={setID}
+            setIsEditing={setIsEditing}
+            setNoteVisibility={setNoteVisibility}
+            setTitle={setTitle}
+          />
         )}
         {noteVisibility && (
           <form
