@@ -7,6 +7,11 @@ import {
   MdQuestionAnswer,
   MdLogout,
   MdSummarize,
+  MdForum,
+  MdSdCard,
+  MdNoteAdd,
+  MdBookmark,
+  MdMenuBook,
 } from "react-icons/md";
 
 type LinkProps = {
@@ -34,13 +39,18 @@ const links: LinkProps[] = [
   },
   {
     title: "Quiz",
-    icon: <MdQuestionAnswer size={24} className="flex-shrink-0" />,
+    icon: <MdMenuBook size={24} className="flex-shrink-0" />,
     href: "/quiz",
   },
   {
     title: "Modules",
     icon: <MdSummarize size={24} className="flex-shrink-0" />,
     href: "/modules",
+  },
+  {
+    title: "Forum",
+    icon: <MdForum size={24} className="flex-shrink-0" />,
+    href: "/forum",
   },
   {
     title: "Logout",

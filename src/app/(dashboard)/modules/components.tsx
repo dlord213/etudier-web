@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FileUpload } from "@/components/ui/file-upload";
+import { SummarizeDropzone } from "@/components/ui/file-upload";
 import { LinkPreview } from "@/components/ui/link-preview";
 import { Textarea } from "@/components/ui/textarea";
 import { useAutoResizeTextarea } from "@/hooks/use-auto-resize-textarea";
@@ -38,7 +38,7 @@ export const SummarizePDF = ({
           </p>
         </div>
       </div>
-      <FileUpload />
+      <SummarizeDropzone />
     </div>
   );
 };
