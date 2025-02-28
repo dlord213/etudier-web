@@ -3,13 +3,9 @@
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { cn } from "@/lib/utils";
 import links from "@/types/Links";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   MdAccountCircle,
-  MdArrowDownward,
-  MdArrowUpward,
-  MdComment,
   MdHub,
   MdImage,
   MdPoll,
@@ -17,8 +13,6 @@ import {
 } from "react-icons/md";
 import { CreatePostModal, Posts } from "./components";
 import { createClient } from "@/supabase/client";
-import { PostProps } from "@/types/Post";
-import { toast } from "sonner";
 
 export default function ClientSideLayout({
   serverPosts,

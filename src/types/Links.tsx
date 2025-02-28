@@ -4,13 +4,9 @@ import {
   MdTaskAlt,
   MdNote,
   MdQuiz,
-  MdQuestionAnswer,
   MdLogout,
   MdSummarize,
   MdForum,
-  MdSdCard,
-  MdNoteAdd,
-  MdBookmark,
   MdMenuBook,
 } from "react-icons/md";
 
