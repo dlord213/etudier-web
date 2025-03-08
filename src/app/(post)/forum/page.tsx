@@ -11,9 +11,7 @@ export default async function Page() {
   const instance = await createClient();
   const posts = await instance
     .from("post")
-    .select(
-      "content, last_edited, created_at, post_id, user (username), upvote, downvote, report_count, image_public_url"
-    )
+    .select("title, content, last_edited, created_at, post_id, user (username)")
     .order("created_at", { ascending: false });
 
   return (

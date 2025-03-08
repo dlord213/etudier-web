@@ -50,9 +50,7 @@ export default function ClientSideLayout({
           try {
             const { data: fullPost, error } = await instance
               .from("post")
-              .select(
-                "content, last_edited, created_at, post_id, user (username), upvote, downvote, report_count, image_public_url"
-              )
+              .select("*, user (username)")
               .eq("post_id", postId)
               .single();
 
@@ -141,7 +139,7 @@ export default function ClientSideLayout({
       </div>
       <FloatingDock
         items={links}
-        mobileClassName="z-10"
+        mobileClassName="z-10 fixed bottom-0"
         desktopClassName="z-10 fixed bottom-0 justify-center inset-x-0 max-w-fit"
       />
       <CreatePostModal

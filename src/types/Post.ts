@@ -8,5 +8,8 @@ export interface PostProps {
   downvote: number;
   report_count: number;
   image_public_url: string[];
+  title: string;
+  tags: string[];
+  is_duplicate: boolean;
   user?: { username: string };
 }
