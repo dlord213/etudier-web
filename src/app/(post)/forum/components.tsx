@@ -8,12 +8,8 @@ import Link from "next/link";
 import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import {
   MdAccountCircle,
-  MdArrowDownward,
-  MdArrowUpward,
   MdClose,
-  MdComment,
   MdImage,
-  MdQuestionAnswer,
   MdUploadFile,
 } from "react-icons/md";
 import { RiCodeBlock } from "react-icons/ri";
@@ -279,7 +275,6 @@ export const CreatePostModal = ({
 };
 
 export const Posts = ({ posts }: { posts: PostProps[] }) => {
-
   return (
     <div className="flex flex-col gap-4">
       {Array.isArray(posts) &&
@@ -299,7 +294,11 @@ export const Posts = ({ posts }: { posts: PostProps[] }) => {
               >
                 {post.title}
               </Link>
-              <EditorProvider content={post.content} extensions={[StarterKit]} editable={false}/>
+              <EditorProvider
+                content={post.content}
+                extensions={[StarterKit]}
+                editable={false}
+              />
             </div>
           );
         })}
