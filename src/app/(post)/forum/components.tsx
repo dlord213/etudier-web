@@ -281,7 +281,7 @@ export const Posts = ({ posts }: { posts: PostProps[] }) => {
         posts.map((post: PostProps) => {
           return (
             <div
-              className="flex flex-col dark:bg-stone-800 p-4 rounded-md gap-4 "
+              className="flex flex-col shadow dark:shadow-none bg-stone-50 dark:bg-stone-800 p-4 rounded-md gap-4 "
               key={post.post_id}
             >
               <div className="flex flex-row gap-4 items-center">

@@ -25,7 +25,7 @@ import { toast } from "sonner";
 export const UserPostHeading = ({ post }: { post: any[] | null }) => {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="text-2xl font-bold">{post![0].title}</h1>
+      <h1 className="text-3xl lg:text-5xl font-bold">{post![0].title}</h1>
       <div className="flex flex-row gap-4">
         <p>
           <span className="text-stone-500">Asked</span>{" "}
@@ -180,13 +180,15 @@ export const UserPost = ({
   }, []);
 
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-4 items-start">
       <div className="flex flex-col gap-4 items-center">
         <button
           type="button"
           className={cn(
-            "p-2 flex-shrink-0 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100  hover:dark:bg-stone-700 hover:bg-stone-200 rounded-md",
-            userVote == "upvote" ? "bg-green-500" : "dark:bg-stone-800"
+            "p-2 flex-shrink-0 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-700 hover:bg-stone-200 rounded-md",
+            userVote == "upvote"
+              ? "bg-green-500 text-white"
+              : "bg-stone-50 shadow dark:shadow-none dark:bg-stone-800"
           )}
           onClick={() => handlePostVote(post![0].post_id, "upvote")}
         >
@@ -197,28 +199,43 @@ export const UserPost = ({
           type="button"
           className={cn(
             "p-2 flex-shrink-0 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100  hover:dark:bg-stone-700 hover:bg-stone-200 rounded-md",
-            userVote == "downvote" ? "bg-red-500" : "dark:bg-stone-800"
+            userVote == "downvote"
+              ? "bg-red-500 text-white"
+              : "bg-stone-50 shadow dark:shadow-none dark:bg-stone-800"
           )}
           onClick={() => handlePostVote(post![0].post_id, "downvote")}
         >
           <MdArrowDownward size={24} />
         </button>
       </div>
-      <div className="flex flex-col justify-between gap-6">
-        <EditorProvider
-          content={post![0].content}
-          extensions={[StarterKit]}
-          editable={false}
-          immediatelyRender={false}
-        />
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col justify-between gap-6 p-4 rounded-xl bg-stone-50 shadow dark:bg-stone-800 w-full">
+          <EditorProvider
+            content={post![0].content}
+            extensions={[StarterKit]}
+            editable={false}
+            immediatelyRender={false}
+          />
+          <div className="flex flex-row justify-between gap-2">
+            <div className="flex flex-row justify-between items-end">
+              <div className="flex flex-col gap-1">
+                <h1 className="dark:text-stone-500">Asked by</h1>
+                <div className="flex flex-row gap-2 items-center">
+                  <MdAccountCircle size={36} />
+                  <p>{post![0].user.username}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="flex flex-col gap-2">
-          <div className="flex flex-row gap-4">
+          <h1 className="dark:text-stone-500">Tags</h1>
+          <div className="flex flex-row gap-2">
             {Array.isArray(post![0].tags) && post![0].tags.length >= 1 && (
               <>
-                <h1 className="dark:text-stone-500">Tags</h1>
                 {post![0].tags.map((tag: string) => (
                   <p
-                    className="px-3 py-1 dark:bg-stone-800 rounded-xl"
+                    className="px-3 py-1 dark:bg-stone-700 rounded-xl bg-stone-50 dark:shadow-none shadow"
                     key={tag}
                   >
                     {tag}
@@ -370,13 +387,15 @@ const UserPostedAnswer = ({ answer }: { answer: any | null }) => {
   };
 
   return (
-    <div className="flex flex-row gap-4">
+    <div className="flex flex-row gap-4 items-start">
       <div className="flex flex-col gap-4 items-center">
         <button
           type="button"
           className={cn(
             "p-2 flex-shrink-0 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100  hover:dark:bg-stone-700 hover:bg-stone-200 rounded-md",
-            userVote === "upvote" ? "bg-green-500" : "dark:bg-stone-800"
+            userVote === "upvote"
+              ? "bg-green-500 text-white"
+              : "bg-stone-50 shadow dark:shadow-none dark:bg-stone-800"
           )}
           onClick={() => handleAnswerVote(answer.id, "upvote")}
         >
@@ -387,14 +406,16 @@ const UserPostedAnswer = ({ answer }: { answer: any | null }) => {
           type="button"
           className={cn(
             "p-2 flex-shrink-0 cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100  hover:dark:bg-stone-700 hover:bg-stone-200 rounded-md",
-            userVote === "downvote" ? "bg-red-500" : "dark:bg-stone-800"
+            userVote === "downvote"
+              ? "bg-red-500 text-white"
+              : "bg-stone-50 shadow dark:shadow-none dark:bg-stone-800"
           )}
           onClick={() => handleAnswerVote(answer.id, "downvote")}
         >
           <MdArrowDownward size={24} />
         </button>
       </div>
-      <div className="flex flex-col justify-between gap-6">
+      <div className="flex flex-col justify-between gap-6 p-4 rounded-xl bg-stone-50 shadow dark:bg-stone-800 w-full">
         <EditorProvider
           content={answer.answer}
           extensions={[StarterKit]}
@@ -419,10 +440,6 @@ export const UserPostedAnswers = ({ answers }: { answers: any[] | null }) => {
   if (Array.isArray(answers)) {
     return (
       <>
-        <div className="flex flex-row justify-between items-center">
-          <h1 className="text-4xl">Answers</h1>
-          {/* PUT SORTING/FILTER DROPDOWN here*/}
-        </div>
         {answers.map((answer) => (
           <UserPostedAnswer answer={answer} key={answer.id} />
         ))}
@@ -447,7 +464,7 @@ export const PostAnswer = ({
     editorProps: {
       attributes: {
         class:
-          "dark:bg-stone-800 p-4 min-h-[30vh] max-h-[30vh] rounded-md focus:outline-none overflow-y-scroll",
+          "dark:bg-stone-800 bg-stone-50 shadow dark:shadow-none p-4 min-h-[30vh] max-h-[30vh] rounded-md focus:outline-none overflow-y-scroll",
       },
     },
     extensions: [StarterKit.configure({})],
@@ -571,7 +588,7 @@ export const PostAnswer = ({
       )}
       <EditorContent editor={editor} />
       <button
-        className="p-4 dark:bg-stone-700 transition-all bg-stone-100 hover:bg-stone-200 delay-0 duration-200 dark:hover:bg-stone-600 flex-1 rounded-md disabled:dark:bg-stone-900 disabled:dark:text-stone-700"
+        className="p-4 dark:bg-stone-700 transition-all shadow dark:shadow-none bg-stone-100 hover:bg-stone-200 delay-0 duration-200 dark:hover:bg-stone-600 flex-1 rounded-md disabled:dark:bg-stone-900 disabled:dark:text-stone-700"
         type="submit"
         disabled={isPosting}
       >

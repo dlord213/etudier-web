@@ -83,7 +83,7 @@ export default function ClientSideLayout({
   return (
     <>
       <div className="flex relative flex-col lg:py-4 py-2 px-8 gap-2 flex-1 lg:max-w-3xl lg:mx-auto w-full min-h-screen">
-        <div className="flex flex-col gap-4 p-4 dark:bg-stone-800 rounded-md sticky ">
+        <div className="flex flex-col gap-4 p-4 shadow dark:shadow-none bg-stone-50 dark:bg-stone-800 rounded-md sticky ">
           <div className="flex flex-row gap-2">
             <MdAccountCircle size={32} className="flex-shrink-0 self-center" />
             <button
