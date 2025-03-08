@@ -98,7 +98,7 @@ export default function ClientSideLayout({
             (module: { link: string; title: string; description: string }) => (
               <LinkPreview
                 url={module.link}
-                className="flex flex-col bg-stone-100 p-4 rounded-md dark:bg-stone-700"
+                className="flex flex-col bg-stone-100 shadow dark:shadow-none p-4 rounded-md dark:bg-stone-700"
                 key={module.link}
               >
                 <h1 className="font-bold text-2xl">{module.title}</h1>

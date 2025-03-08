@@ -196,7 +196,7 @@ export const FlashcardModalSheet = ({
           )}
           <div className="flex flex-row gap-4">
             <button
-              className="w-full flex flex-row gap-2 px-4 py-2 rounded-md justify-center dark:bg-stone-700 items-center"
+              className="w-full flex flex-row gap-2 px-4 py-2 rounded-md justify-center bg-stone-50 dark:shadow-none shadow dark:bg-stone-700 items-center"
               onClick={() => {
                 if (modalIndex != 0) {
                   setModalIndex((prevIndex) => prevIndex! - 1);
@@ -206,7 +206,7 @@ export const FlashcardModalSheet = ({
               <MdArrowLeft size={24} />
             </button>
             <button
-              className="w-full flex flex-row gap-2 px-4 py-2 rounded-md justify-center dark:bg-stone-700 items-center"
+              className="w-full flex flex-row gap-2 px-4 py-2 rounded-md justify-center bg-stone-50 dark:shadow-none shadow dark:bg-stone-700 items-center"
               onClick={() => {
                 if (modalIndex! != card.length) {
                   setModalIndex((prevIndex) => prevIndex! + 1);
@@ -384,9 +384,9 @@ export const GenerateFlashcardModalSheet = ({
                   result![0].cards.map((card: CardProps, index: number) => (
                     <div
                       key={index}
-                      className="flex flex-row gap-2 p-4 dark:bg-stone-800 rounded-md"
+                      className="flex flex-row gap-2 p-4 bg-stone-50 dark:bg-stone-800 rounded-md"
                     >
-                      <div className="flex flex-row gap-4 items-center">
+                      <div className="flex flex-row gap-4 items-center flex-shrink-0">
                         <MdPlayCircle
                           size={24}
                           className="cursor-pointer transition-all duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 rounded-md"
@@ -552,9 +552,9 @@ export const GenerateFlashcardModalSheet = ({
                 want.
               </p>
             </div>
-            <div className="flex flex-row gap-2 items-center p-4 dark:bg-stone-700 rounded-md">
+            <div className="flex flex-row gap-2 items-center p-4 bg-stone-50 dark:shadow-none shadow dark:bg-stone-700 rounded-md">
               <MdError size={36} className="flex-shrink-0" />
-              <h1 className="font-bold">{result!.error}</h1>
+              <h1 className="font-medium">{result!.error}</h1>
             </div>
           </div>
         </div>

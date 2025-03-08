@@ -120,7 +120,7 @@ export const SearchModule = ({
       <div className="flex flex-row gap-4 items-center">
         <MdArrowLeft
           size={28}
-          className="cursor-pointer transition-all delay-0 duration-200 hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
+          className="cursor-pointer transition-all delay-0 duration-200 bg-stone-50 shadow dark:shadow-none hover:dark:text-stone-100 hover:dark:bg-stone-800 hover:bg-stone-200 rounded-md"
           onClick={() => setIndex!(0)}
         />
         <h1 className="font-bold lg:text-3xl text-xl">Search Module</h1>
@@ -146,9 +146,8 @@ export const SearchModule = ({
             max={date}
             value={yearFilter}
             onChange={(e) => setYearFilter(e.target.value)}
-            className="outline-none p-2 dark:bg-stone-900 bg-stone-100 hover:bg-stone-200 delay-0 duration-200 transition-all dark:hover:bg-stone-700 rounded-md cursor-pointer"
+            className="outline-none p-2 dark:bg-stone-900 bg-stone-100 shadow dark:shadow-none hover:bg-stone-200 delay-0 duration-200 transition-all dark:hover:bg-stone-700 rounded-md cursor-pointer"
           />
-          <p className="font-black">{">"}</p>
         </div>
       </div>
       {isGenerating == 0 && (
@@ -264,7 +263,7 @@ export const SearchModule = ({
                   <div className="flex flex-row gap-2" key={item.link}>
                     <LinkPreview
                       url={item.link}
-                      className="flex flex-col bg-stone-100 p-4 rounded-md dark:bg-stone-700"
+                      className="flex flex-col shadow dark:shadow-none bg-stone-100 p-4 rounded-md dark:bg-stone-700"
                     >
                       <h1 className="font-bold text-2xl">{item.title}</h1>
                       <h1 className="text-sm">{item.description}</h1>

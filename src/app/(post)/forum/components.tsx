@@ -41,7 +41,7 @@ export const CreatePostModal = ({
   const editor = useEditor({
     editorProps: {
       attributes: {
-        class: "dark:bg-stone-700 p-4 min-h-full rounded-md focus:outline-none",
+        class: "dark:bg-stone-700 bg-stone-100 dark:shadow-none shadow p-4 min-h-full rounded-md focus:outline-none",
       },
     },
     extensions: [
@@ -141,7 +141,7 @@ export const CreatePostModal = ({
               />
               <input
                 type="text"
-                className="font-bold outline-none lg:text-4xl w-full bg-stone-800"
+                className="font-bold outline-none lg:text-4xl w-full dark:bg-stone-800"
                 placeholder="Put your title here..."
                 name="title"
                 value={postTitle}
@@ -260,7 +260,7 @@ export const CreatePostModal = ({
             </div>
             <div className="flex flex-row gap-4 rounded-md justify-between">
               <button
-                className="p-4 dark:bg-stone-700 transition-all bg-stone-100 hover:bg-stone-200 delay-0 duration-200 dark:hover:bg-stone-600 flex-1 rounded-md disabled:dark:bg-stone-900 disabled:dark:text-stone-700"
+                className="p-4 dark:bg-stone-700 transition-all bg-stone-100 shadow dark:shadow-none disabled:bg-stone-300 hover:bg-stone-200 delay-0 duration-200 dark:hover:bg-stone-600 flex-1 rounded-md disabled:dark:bg-stone-900 disabled:dark:text-stone-700"
                 disabled={isUploading || !postContent}
                 type="submit"
               >

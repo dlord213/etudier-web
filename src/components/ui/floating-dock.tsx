@@ -76,7 +76,7 @@ const FloatingDockMobile = ({
                     <Link
                       href={item.href}
                       key={item.title}
-                      className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-900 flex items-center justify-center"
+                      className="h-10 w-10 rounded-full bg-stone-50 dark:bg-stone-900 flex items-center justify-center"
                     >
                       <div className="h-4 w-4">{item.icon}</div>
                     </Link>
@@ -101,7 +101,7 @@ const FloatingDockMobile = ({
                 >
                   <button
                     key={item.title}
-                    className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-900 flex items-center justify-center"
+                    className="h-10 w-10 rounded-full bg-stone-50 dark:bg-stone-900 flex items-center justify-center"
                     type="button"
                     onClick={item.onClickFunction}
                   >
@@ -115,9 +115,9 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-800 flex items-center justify-center"
+        className="h-10 w-10 rounded-full bg-stone-50 dark:bg-stone-800 flex items-center justify-center"
       >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
+        <IconLayoutNavbarCollapse className="h-5 w-5 text-stone-500 dark:text-stone-400" />
       </button>
     </div>
   );
@@ -141,7 +141,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-16 gap-4 items-end rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 pb-3",
+        "mx-auto hidden md:flex h-16 gap-4 items-end rounded-2xl bg-stone-50 shadow dark:shadow-none dark:bg-stone-900 px-4 pb-3",
         className
       )}
     >
@@ -219,7 +219,7 @@ function IconLinkContainer({
           style={{ width, height }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          className="aspect-square rounded-full bg-gray-200 dark:bg-neutral-800 flex items-center justify-center relative"
+          className="aspect-square rounded-full bg-stone-200 shadow dark:shadow-none dark:bg-stone-800 flex items-center justify-center relative"
         >
           <AnimatePresence>
             {hovered && (
@@ -227,7 +227,7 @@ function IconLinkContainer({
                 initial={{ opacity: 0, y: 10, x: "-50%" }}
                 animate={{ opacity: 1, y: 0, x: "-50%" }}
                 exit={{ opacity: 0, y: 2, x: "-50%" }}
-                className="px-2 py-0.5 whitespace-pre rounded-md bg-gray-100 dark:bg-neutral-800 dark:border-neutral-900 dark:text-white text-neutral-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-sm shadow dark:shadow-none"
+                className="px-2 py-0.5 whitespace-pre rounded-md bg-stone-100 dark:bg-stone-800 dark:border-stone-900 dark:text-white text-stone-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-sm shadow dark:shadow-none"
               >
                 {title}
               </motion.div>
@@ -251,7 +251,7 @@ function IconLinkContainer({
           style={{ width, height }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          className="aspect-square rounded-full bg-gray-200 dark:bg-neutral-800 flex items-center justify-center relative"
+          className="aspect-square rounded-full bg-stone-200 dark:bg-stone-800 flex items-center justify-center relative"
         >
           <AnimatePresence>
             {hovered && (
@@ -259,7 +259,7 @@ function IconLinkContainer({
                 initial={{ opacity: 0, y: 10, x: "-50%" }}
                 animate={{ opacity: 1, y: 0, x: "-50%" }}
                 exit={{ opacity: 0, y: 2, x: "-50%" }}
-                className="px-2 py-0.5 whitespace-pre rounded-md bg-gray-100 dark:bg-neutral-800 dark:border-neutral-900 dark:text-white text-neutral-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-sm shadow dark:shadow-none"
+                className="px-2 py-0.5 whitespace-pre rounded-md bg-stone-100 dark:bg-stone-800 dark:border-stone-900 dark:text-white text-stone-700 absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-sm shadow dark:shadow-none"
               >
                 {title}
               </motion.div>
